@@ -21,7 +21,7 @@ function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
       listContacts()
-        .then((data) => console.log(data))
+        .then((data) => console.table(data))
         .catch((error) => console.log(error));
 
       break;
@@ -39,7 +39,7 @@ function invokeAction({ action, id, name, email, phone }) {
 
     case "add":
       addContact(name, email, phone)
-        .then((data) => console.log(data))
+        .then((data) => console.table(data))
         .catch((error) => console.log(error));
 
       break;

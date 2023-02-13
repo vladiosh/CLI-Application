@@ -4,10 +4,8 @@ const { v4: uuidv4 } = require("uuid");
 
 const contactsPath = path.resolve("./db/contacts.json");
 
-console.log(contactsPath);
-
-async function updateContactsList(newList) {
-  await fs.writeFile(contactsPath, JSON.stringify(newList));
+async function updateContactsList(newContactsList) {
+  await fs.writeFile(contactsPath, JSON.stringify(newContactsList));
 }
 
 async function listContacts() {
@@ -27,7 +25,7 @@ async function getContactById(contactId) {
     const findContact = await contactList.find(
       (contact) => contact.id === contactId
     );
-    console.log(findContact);
+
     return findContact;
   } catch (error) {
     console.log(error);
@@ -37,14 +35,14 @@ async function getContactById(contactId) {
 async function removeContact(contactId) {
   try {
     const contactsList = await listContacts();
-    const index = await contactsList.find(
+    const index = await contactsList.findIndex(
       (contact) => contact.id === contactId
     );
     if (index === -1) {
       return null;
     }
     const filteredContact = contactsList.splice(index, 1);
-    updateContactsList(contactsList);
+    await updateContactsList(contactsList);
     return filteredContact;
   } catch (error) {
     console.log(error);
