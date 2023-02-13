@@ -17,7 +17,6 @@ program.parse(process.argv);
 
 const argv = program.opts();
 
-// TODO: рефакторить
 function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
@@ -31,7 +30,7 @@ function invokeAction({ action, id, name, email, phone }) {
       getContactById(id)
         .then((data) => {
           return !data
-            ? console.log(`Contact with index ${id} wasn't find`)
+            ? console.log(`There is no contact with index ${id}`)
             : console.log(data);
         })
         .catch((error) => console.log(error));
@@ -49,7 +48,7 @@ function invokeAction({ action, id, name, email, phone }) {
       removeContact(id)
         .then((data) => {
           return !data
-            ? console.log(`Contact with index ${id} wasn't find`)
+            ? console.log(`There is no contact with index ${id}`)
             : console.log(data);
         })
         .catch((error) => console.log(error));

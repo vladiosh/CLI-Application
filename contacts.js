@@ -40,6 +40,9 @@ async function removeContact(contactId) {
     const index = await contactsList.find(
       (contact) => contact.id === contactId
     );
+    if (index === -1) {
+      return null;
+    }
     const filteredContact = contactsList.splice(index, 1);
     updateContactsList(contactsList);
     return filteredContact;
